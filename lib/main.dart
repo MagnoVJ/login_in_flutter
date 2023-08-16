@@ -31,29 +31,24 @@ class LinePainter extends CustomPainter {
 
 void main() {
   //debugPaintSizeEnabled = true;
-  runApp(MainApp());
-}
-
-class MainApp extends StatelessWidget {
-  Widget build(BuildContext context) {
-    return MaterialApp(home: TextBoxWidget(0, 0));
-  }
+  runApp(RootWidget());
 }
  
-class TextBoxWidget extends StatelessWidget {
-
-  TextBoxWidget(this.topValue, this.leftValue);
-
-  final int topValue;
-  final int leftValue;
+class RootWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: Scaffold(body: buildCustomWidget()));
+    return MaterialApp(home: Scaffold(body: FormDoubleCustomTextbOX(0,0)));
   }
 
   @override
-  Widget buildCustomWidget() {
+  Widget FormDoubleCustomTextbOX(final int topValue, final int leftValue) {
+    return Stack(children: [CustomTextBox(topValue, leftValue, 'assets/login-logo-removebg-preview.png', 'Nome'), 
+    CustomTextBox(55 + topValue, leftValue, 'assets/lock-icon-removebg-preview.png', 'Senha')]);
+  }
+
+  @override
+  Widget CustomTextBox(final int topValue, final int leftValue, String assetPathString, String hintName) {
     //return MaterialApp(home: Scaffold(body: Center(child: Text('Login', style:GoogleFonts.poppins( textStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 36))))));
     return Stack(children: [
       Positioned(
@@ -63,7 +58,7 @@ class TextBoxWidget extends StatelessWidget {
           width: 30,
           height: 30,
           //color: Colors.red,
-          child: Image.asset('assets/login-logo-removebg-preview.png')
+          child: Image.asset(assetPathString)
           //child: Text('Login', style:GoogleFonts.poppins( textStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 40)))
         )
       ),
@@ -85,7 +80,7 @@ class TextBoxWidget extends StatelessWidget {
           width: 276,
           height: 50,
           //color: Colors.red,
-          child: TextField(maxLength: 25, style: GoogleFonts.poppins(textStyle: TextStyle(fontWeight: FontWeight.normal, fontSize: 22)), decoration: InputDecoration(counterText: '', focusedBorder: InputBorder.none,border: InputBorder.none,hintText: "Nome"))
+          child: TextField(maxLength: 25, style: GoogleFonts.poppins(textStyle: TextStyle(fontWeight: FontWeight.normal, fontSize: 22)), decoration: InputDecoration(counterText: '', focusedBorder: InputBorder.none,border: InputBorder.none,hintText: hintName))
           //child: Text('Login', style:GoogleFonts.poppins( textStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 40)))
         )
       )
